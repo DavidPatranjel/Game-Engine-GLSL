@@ -1,0 +1,9 @@
+namespace NewTrainingFramework
+{
+    [default_interface]
+    runtimeclass GeneralModelShaderVS : Windows.UI.Xaml.Controls.Page
+    {
+        GeneralModelShaderVS();
+        Int32 MyProperty;
+    }
+}

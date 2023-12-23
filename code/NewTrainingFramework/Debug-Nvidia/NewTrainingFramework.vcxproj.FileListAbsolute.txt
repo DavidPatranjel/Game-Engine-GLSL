@@ -1,0 +1,6 @@
+D:\Faculta\GAMELOFT\proiect_2015\NewTrainingFramework_2015\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.MdMergeInputs.cache
+D:\Faculta\GAMELOFT\proiect_2015\NewTrainingFramework_2015\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.cppwinrt_plat.cache
+D:\Faculta\GAMELOFT\proiect_2015\NewTrainingFramework_2015\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.cppwinrt_comp.cache
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.MdMergeInputs.cache
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.cppwinrt_plat.cache
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-Nvidia\NewTrainingFramework.vcxproj.cppwinrt_comp.cache
