@@ -1,0 +1,12 @@
+# Ignore Visual Studio Code files
+code/.vs/
+
+# Ignore Visual Studio .suo files
+code/.vs/NewTrainingFramework/v17/.suo
+
+# Ignore Visual Studio database files
+code/.vs/NewTrainingFramework/v17/Browse.VC.db
+
+# Ignore Debug and log files
+code/NewTrainingFramework/Debug-Nvidia/
+code/Utilities/Debug-Nvidia/
