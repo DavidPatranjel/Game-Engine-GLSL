@@ -1,6 +1,0 @@
-﻿cl : command line  warning D9035: option 'Gm' has been deprecated and will be removed in a future release
-  NewTrainingFramework.cpp
-D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\NewTrainingFramework.cpp(176,9): warning C4101: 'index': unreferenced local variable
-D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\NewTrainingFramework.cpp(474,20): warning C4305: '-=': truncation from 'double' to 'float'
-Globals.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/SAFESEH' specification
-  NewTrainingFramework.vcxproj -> D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\BIN-Nvidia\NewTrainingFramework.exe
