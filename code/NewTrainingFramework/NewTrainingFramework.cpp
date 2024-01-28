@@ -7,6 +7,9 @@
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include "Vertex.h"
 #include "Shaders.h"
+#include "Shaders.h"
+#include "ResourceManager.h"
+#include "SceneManager.h"
 #include <conio.h>
 #include <vector>
 #include <string>
@@ -18,6 +21,8 @@
 #define PI 3.141592
 using namespace rapidxml;
 
+const char* resourceManagerFileXML = "../../textures/resourceManager.xml";
+const char* sceneManagerFileXML = "../../textures/sceneManager.xml";
 float angle = 0.0f, step = 0.1f, totalTime = 0.0f;
 
 GLuint vboId, vboIdLine, verticesID, indicesID, textureID;
@@ -173,7 +178,7 @@ void parseFile(const std::string& filename, std::vector<Vertex>& vertices, std::
 			indices.resize(numIndices); 
 
 			for (int i = 0; i < numIndices / 3; ++i) {
-				int index, v0, v1, v2;
+				int v0, v1, v2;
 				char dummy;
 
 				std::getline(file, line);
@@ -214,38 +219,6 @@ void writeVerticesAndIndices(const std::vector<Vertex>& vertices, const std::vec
 	}
 }
 
-void parseXML(const char* filePath)
-{
-	std::ifstream file(filePath);
-	std::stringstream buffer;
-	buffer << file.rdbuf();
-	file.close();
-	std::string xmlContent(buffer.str());
-
-	// Create an XML document object
-	xml_document<> doc;
-	doc.parse<0>(&xmlContent[0]);
-	std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
-
-	xml_node<>* pRoot = doc.first_node();
-
-	for (xml_node<>* pNode = pRoot->first_node("obiect"); pNode; pNode = pNode->next_sibling())
-	{
-		std::cout << "Object ID: " << pNode->first_attribute("id")->value() << std::endl;
-		std::cout << "Object Name: " << pNode->first_attribute("nume")->value() << std::endl;
-
-		xml_node<>* modelNode = pNode->first_node("model");
-		std::cout << "Model Info: " << modelNode->first_attribute("info")->value() << std::endl;
-		std::cout << "Model Value: " << modelNode->value() << std::endl;
-
-		xml_node<>* texturaNode = pNode->first_node("textura");
-		std::cout << "Textura Folder: " << texturaNode->first_attribute("folder")->value() << std::endl;
-		std::cout << "Textura Value: " << texturaNode->value() << std::endl;
-
-		std::cout << std::endl;
-	}
-}
-
 
 int Init ( ESContext *esContext )
 {
@@ -261,10 +234,11 @@ int Init ( ESContext *esContext )
 	const char* texturePath = "../../textures/Textures/Bus.tga";
 	char* array_pixels =  LoadTGA(texturePath, &TWidth, &THeight, &TBBP);
 
-	///read XML
-	const char* XMLPath = "../../textures/exemplu_xml.xml";
-	parseXML(XMLPath);
-
+	///resource manager
+	ResourceManager* resourceManager = ResourceManager::getInstance();
+	resourceManager->Init(resourceManagerFileXML);
+	SceneManager* sceneManager = SceneManager::getInstance();
+	sceneManager->Init(sceneManagerFileXML);
 	//triangle data (heap)
 	Vertex verticesData[6];
 
@@ -581,6 +555,7 @@ void Key ( ESContext *esContext, unsigned char key, bool bIsPressed)
 void CleanUp()
 {
 	glDeleteBuffers(1, &vboId);
+	ResourceManager::getInstance()->freeResources();
 }
 
 int _tmain(int argc, _TCHAR* argv[])

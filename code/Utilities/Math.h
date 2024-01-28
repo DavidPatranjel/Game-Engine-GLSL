@@ -49,7 +49,7 @@ public:
 	Vector3(Vector4& v4);
 	Vector3(GLfloat _x, GLfloat _y, GLfloat _z) : x(_x), y(_y), z(_z) {}
 	Vector3(GLfloat * pArg) : x(pArg[0]), y(pArg[1]), z(pArg[2]) {}
-	Vector3(Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
+	Vector3(const Vector3 & vector) : x(vector.x), y(vector.y), z(vector.z) {}
 	
 	//Vector's operations
 	GLfloat Length();
@@ -192,8 +192,7 @@ public:
 		yAxis(0.0f, 1.0f, 0.0f),
 		zAxis(0.0f, 0.0f, 1.0f),
 		viewMatrix(0.0f),
-		worldMatrix(0.0f),
-		perspectiveMatrix(0.1f)
+		worldMatrix(0.0f)
 	{
 		updateWorldView();
 		GLfloat aspect = (float) Globals::screenWidth / Globals::screenHeight;
@@ -209,9 +208,9 @@ public:
 			GLfloat _farPlane = 2000.0f,
 			GLfloat _fov = 0.785f,
 			GLfloat _deltaTime = 0.1f,
-			Vector3 _xAxis = Vector3(0.0f, 0.0f, 0.0f),
-			Vector3 _yAxis = Vector3(0.0f, 0.0f, 0.0f),
-			Vector3 _zAxis = Vector3(0.0f, 0.0f, 0.0f),
+			Vector3 _xAxis = Vector3(1.0f, 0.0f, 0.0f),
+			Vector3 _yAxis = Vector3(0.0f, 1.0f, 0.0f),
+			Vector3 _zAxis = Vector3(0.0f, 0.0f, 1.0f),
 			Matrix _viewMatrix = 0.0f,
 			Matrix _worldMatrix = 0.0f) : 
 				position(_position), target(_target), up(_up), moveSpeed(_moveSpeed),
