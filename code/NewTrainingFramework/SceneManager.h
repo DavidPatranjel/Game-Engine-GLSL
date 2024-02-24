@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "SceneObject.h"
+#include "KBInput.h"
 #include "../Utilities/utilities.h"
 
 class SceneManager
@@ -8,6 +9,7 @@ class SceneManager
 private:
 	static SceneManager* spInstance;
 	SceneManager() {};
+	float totalTime = 0.0f;
 
 	char* gameName;
 	int screenWidth, screenHeight;
@@ -18,6 +20,9 @@ private:
 	int activeCamera;
 	std::unordered_map<int, SceneObject*> sceneObjects;
 	std::vector<Vector3> objectAxes, camAxes;
+
+public:
+	KBInput* keyboardInput;
 	//std::vector<Lights*> lights; 
 public:
 	static SceneManager* getInstance();
@@ -25,8 +30,8 @@ public:
 	~SceneManager();
 
 	void Init(const char* resourceFileXML);
-	void Draw();
-	void Update();
+	void Draw(ESContext* esContext);
+	void Update(float deltaTime);
 
 	template<typename T>
 	T* addOrRetrieveElement(std::unordered_map<int, T*>& resourceMap, int key, T* value)
@@ -45,5 +50,22 @@ public:
 		return value;
 	}
 
+	KBInput* GetKeyboardInput()
+	{
+		return keyboardInput;
+	}
+
+	void moveActiveCameraOX(int sense);
+	void moveActiveCameraOY(int sense);
+	void moveActiveCameraOZ(int sense);
+
+	void rotateActiveCameraOX(int sense);
+	void rotateActiveCameraOY(int sense);
+	void rotateActiveCameraOZ(int sense);
+
+private:
+	float toRadians(float n) {
+		return n * 3.1415 / 180;
+	}
 };
 

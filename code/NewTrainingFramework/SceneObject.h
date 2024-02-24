@@ -13,13 +13,14 @@ private:
 	Model* model;
 	Shader* shader;
 	std::vector<Texture*> texture;
+	std::string name;
 	bool depthTest;
+	Matrix modelMatrix;
+
 public:
-	SceneObject(int objectId, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
-		Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest)
-		: id(objectId), color(objectColor), position(objectPosition), rotation(objectRotation), scale(objectScale),
-		model(objectModel), shader(objectShader), texture(objectTexture), depthTest(useDepthTest)
-	{}
+	SceneObject(int objectId, const std::string& _name, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
+		Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest);
+	void Draw(Camera* activeCamera, ESContext* esContext);
 
 };
 

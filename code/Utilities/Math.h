@@ -214,7 +214,7 @@ public:
 			Matrix _viewMatrix = 0.0f,
 			Matrix _worldMatrix = 0.0f) : 
 				position(_position), target(_target), up(_up), moveSpeed(_moveSpeed),
-				rotateSpeed(_rotateSpeed), nearPlane(_nearPlane), farPlane(_farPlane), fov(),
+				rotateSpeed(_rotateSpeed), nearPlane(_nearPlane), farPlane(_farPlane), fov(_fov),
 				deltaTime(_deltaTime), 
 				xAxis(_xAxis), yAxis(_yAxis), zAxis(_zAxis),
 				viewMatrix(_viewMatrix), worldMatrix(_worldMatrix), perspectiveMatrix()

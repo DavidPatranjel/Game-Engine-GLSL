@@ -4,7 +4,7 @@
 
 class Shader
 {
-private:
+public:
 	ShaderResource* sr;
 
 	GLuint program, vertexShader, fragmentShader;
@@ -13,6 +13,7 @@ private:
 	GLint matrixUniform;
 	GLint mMVP;
 	GLint uvAttribute;
+	GLint textureUniform;
 
 public:
 	Shader(ShaderResource* shader) 

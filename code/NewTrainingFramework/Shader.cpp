@@ -35,6 +35,7 @@ int Shader::Load(char* folder)
 	matrixUniform = glGetUniformLocation(program, "u_rotation");
 	mMVP = glGetUniformLocation(program, "uMVP");
 	uvAttribute = glGetAttribLocation(program, "a_uv");
+	textureUniform = glGetUniformLocation(program, "uMVP");
 
 	return 0;
 }

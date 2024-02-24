@@ -84,7 +84,7 @@
 			<model>1</model>
 			<shader>10</shader>
 			<type>normal</type>
-			<name>Crocodil_verde_unu</name>
+			<name>Crocodil_verde</name>
 			<textures>
 				<texture id="4"/>
 			</textures>
