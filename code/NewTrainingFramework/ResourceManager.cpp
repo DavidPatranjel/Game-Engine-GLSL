@@ -31,7 +31,6 @@ void ResourceManager::Init(const char* resourceFileXML)
 	// Create an XML document object
 	xml_document<> doc;
 	doc.parse<0>(&xmlContent[0]);
-	std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
 
 	xml_node<>* pRoot = doc.first_node();
 
@@ -51,9 +50,6 @@ void ResourceManager::Init(const char* resourceFileXML)
 	{
 		int id = std::stoi(pNode->first_attribute("id")->value());
 		char* file = pNode->first_node("file")->value();
-		
-		std::cout << "Model ID: " << id << std::endl;
-		std::cout << "Model FILE: " << file << std::endl;
 		
 		ModelResource* modelResource = new ModelResource(id, file);
 		addOrRetrieveElement(modelResources, id, modelResource);
@@ -76,11 +72,7 @@ void ResourceManager::Init(const char* resourceFileXML)
 	{
 		int id = std::stoi(pNode->first_attribute("id")->value());
 		char* vs = pNode->first_node("vs")->value();
-		char* fs = pNode->first_node("fs")->value();
-
-		std::cout << "Shader ID: " << id << std::endl;
-		std::cout << "Shader VS: " << vs << std::endl;
-		std::cout << "Shader FS: " << fs << std::endl;
+		char* fs = pNode->first_node("fs")->value();;
 
 		ShaderResource* shaderResource = new ShaderResource(id, vs, fs);
 		addOrRetrieveElement(shaderResources, id, shaderResource);
@@ -102,18 +94,10 @@ void ResourceManager::Init(const char* resourceFileXML)
 		int id = std::stoi(pNode->first_attribute("id")->value());
 		char* texturetype = pNode->first_attribute("type")->value();
 		char* file = pNode->first_node("file")->value();
-		char* minf = pNode->first_node("min_filter")->value();
-		char* magf = pNode->first_node("mag_filter")->value();
-		char* wraps = pNode->first_node("wrap_s")->value();
-		char* wrapt = pNode->first_node("wrap_t")->value();
-
-		std::cout << "Texture ID: " << id << std::endl;
-		std::cout << "Texture Type: " << texturetype << std::endl;
-		std::cout << "Texture File: " << file << std::endl;
-		std::cout << "Texture MINF: " << minf << std::endl;
-		std::cout << "Texture MAGF: " << magf << std::endl;
-		std::cout << "Texture WRAPS: " << wraps << std::endl;
-		std::cout << "Texture WRAPT: " << wrapt << std::endl;
+		std::string minf = pNode->first_node("min_filter")->value();
+		std::string magf = pNode->first_node("mag_filter")->value();
+		std::string wraps = pNode->first_node("wrap_s")->value();
+		std::string wrapt = pNode->first_node("wrap_t")->value();
 
 		TextureResource* textureResource = new TextureResource(id, texturetype, file, minf, magf, wraps, wrapt);
 		addOrRetrieveElement(textureResources, id, textureResource);
@@ -129,6 +113,30 @@ void ResourceManager::freeResources()
 	delete[] modelPath;
 	delete[] shaderPath;
 	delete[] texturePath;
+
+	// Delete all ModelResources
+	for (auto& entry : modelResources)
+		delete entry.second;
+
+	// Delete all ShaderResources
+	for (auto& entry : shaderResources)
+		delete entry.second;
+
+	// Delete all TextureResources
+	for (auto& entry : textureResources)
+		delete entry.second;
+
+	// Delete all Models
+	for (auto& entry : models)
+		delete entry.second;
+
+	// Delete all Shaders
+	for (auto& entry : shaders)
+		delete entry.second;
+
+	// Delete all Textures
+	for (auto& entry : textures)
+		delete entry.second;
 }
 
 Model* ResourceManager::loadModel(int modelResourceKey)
@@ -184,34 +192,4 @@ Shader* ResourceManager::loadShader(int shaderResourceKey)
 	return shaders[shaderResourceKey];
 }
 
-ResourceManager::~ResourceManager()
-{
-	// Delete all ModelResources
-	for (auto& entry : modelResources)
-		delete entry.second;
-
-	// Delete all ShaderResources
-	for (auto& entry : shaderResources)
-		delete entry.second;
-
-	// Delete all TextureResources
-	for (auto& entry : textureResources)
-		delete entry.second;
-
-	// Delete all Models
-	for (auto& entry : models)
-		delete entry.second;
-
-	// Delete all Shaders
-	for (auto& entry : shaders)
-		delete entry.second;
-
-	// Delete all Textures
-	for (auto& entry : textures)
-		delete entry.second;
-
-	// Release the memory for char pointers
-	delete[] modelPath;
-	delete[] shaderPath;
-	delete[] texturePath;
-}
+ResourceManager::~ResourceManager() {}

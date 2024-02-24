@@ -60,7 +60,7 @@
 				<wrap_t>CLAMP_TO_EDGE</wrap_t>
 			</texture>		
 			<texture id="5" type="2d">
-				<file>Bus.tga</file>
+				<file>bus.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>

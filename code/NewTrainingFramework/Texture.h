@@ -5,11 +5,11 @@
 
 class Texture
 {
-private:
+public:
 	TextureResource* tr;
 	GLuint textureID;
 
-	std::unordered_map<char*, int> textureData = {
+	std::unordered_map<std::string, int> textureData = {
 		{"LINEAR", GL_LINEAR},
 		{"NEAREST", GL_NEAREST},
 		{"CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE}
@@ -19,7 +19,10 @@ public:
 	{
 		tr = texture;
 	};
-	~Texture() {};
+	~Texture() 
+	{
+		glDeleteBuffers(1, &textureID);
+	}
 	void Load(char* folder);
 };
 

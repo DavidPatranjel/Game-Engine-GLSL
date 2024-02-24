@@ -19,6 +19,37 @@ SceneManager* SceneManager::getInstance()
 
 }
 
+void SceneManager::freeResources()
+{
+	delete[] gameName;
+	for (auto& entry : cameras)
+		delete entry.second;
+
+	for (auto& entry : sceneObjects)
+		delete entry.second;
+}
+
+
+void SceneManager::Update(float deltaTime)
+{
+	totalTime += deltaTime;
+	if (totalTime > Globals::frameTime)
+	{
+		// do action
+		cameras[activeCamera] -> setDeltaTime(totalTime);
+		totalTime = 0.0f;
+	}
+}
+
+void SceneManager::Draw(ESContext* esContext)
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	for (const auto& pair : sceneObjects) {
+		pair.second -> Draw(cameras[activeCamera], esContext);
+	}
+	eglSwapBuffers(esContext->eglDisplay, esContext->eglSurface); //avem nevoie de doua buffere pt a randa frumos
+
+}
 
 void SceneManager::Init(const char* resourceFileXML)
 {
@@ -53,13 +84,23 @@ void SceneManager::Init(const char* resourceFileXML)
 	backgroundColor.z = atof(pRoot->first_node("backgroundColor")->first_node("b")->value());
 
 	///Read controls
+	keyboardInput = new KBInput();
+	xml_node<>* pControls = pRoot->first_node("controls");
+	for (xml_node<>* pNode = pControls ->first_node("control"); pNode; pNode = pNode->next_sibling())
+	{
+		char* key = pNode->first_node("key")->value();
+		char k = *key;
+		std::string action = pNode->first_node("action")->value();
+		keyboardInput->BindKey(k, action);
+	}
 
 	///Read cameras
 	xml_node<>* pCameras = pRoot->first_node("cameras");
 	for (xml_node<>* pNode = pCameras->first_node("camera"); pNode; pNode = pNode->next_sibling())
 	{
 		int id = std::stoi(pNode->first_attribute("id")->value());
-		char* type = pNode->first_node("type")->value(); ///ce facem aici?
+		/// type is for first person or third person TBC
+		char* type = pNode->first_node("type")->value(); 
 		Vector3 position, target, up;
 		position.x = atof(pNode->first_node("position")->first_node("x")->value());
 		position.y = atof(pNode->first_node("position")->first_node("y")->value());
@@ -76,12 +117,9 @@ void SceneManager::Init(const char* resourceFileXML)
 		float transSpeed = atof(pNode->first_node("translationSpeed")->value());
 		float rotSpeed = atof(pNode->first_node("rotationSpeed")->value());
 		float fov = atof(pNode->first_node("fov")->value());
+		fov = toRadians(fov);
 		float nearVal = atof(pNode->first_node("near")->value());
 		float farVal = atof(pNode->first_node("far")->value());
-
-		std::cout << "camera ID: " << id << std::endl;
-		std::cout << "camera position: " << position.x << " " <<position.y << " " << position.z << std::endl;
-		std::cout << "camera target: " << target.x <<" " <<target.y <<" "<<target.z << std::endl;
 
 		///ce facem cu type
 		Camera* cam = new Camera(position, target, up,
@@ -100,13 +138,15 @@ void SceneManager::Init(const char* resourceFileXML)
 	for (xml_node<>* pNode = pObjects->first_node("object"); pNode; pNode = pNode->next_sibling())
 	{
 		int id = std::stoi(pNode->first_attribute("id")->value());
-		int modelID = std::stoi(pNode->first_node("model")->value());
+		std::string name = pNode->first_node("name")->value();
+		char* modelType = pNode->first_node("model")->value();
+		if (std::strcmp(modelType, "generated") == 0) continue; ///TBC
+		int modelID = std::stoi(modelType);
 		int shaderID = std::stoi(pNode->first_node("shader")->value());
 		char* type = pNode->first_node("type")->value();
 		xml_node<>* pWiered = pNode->first_node("wired");
 		bool wiered = true;
 		if (pWiered == 0) wiered = false;
-		char* name = pNode->first_node("name")->value();
 		Vector3 color, position, rotation, scale;
 		xml_node<>* pColor = pNode->first_node("color");
 		if (pColor) 
@@ -122,6 +162,9 @@ void SceneManager::Init(const char* resourceFileXML)
 		rotation.x = atof(pNode->first_node("rotation")->first_node("x")->value());
 		rotation.y = atof(pNode->first_node("rotation")->first_node("y")->value());
 		rotation.z = atof(pNode->first_node("rotation")->first_node("z")->value());
+		rotation.x = toRadians(rotation.x);
+		rotation.y = toRadians(rotation.y);
+		rotation.z = toRadians(rotation.z);
 
 		scale.x = atof(pNode->first_node("scale")->first_node("x")->value());
 		scale.y = atof(pNode->first_node("scale")->first_node("y")->value());
@@ -134,7 +177,7 @@ void SceneManager::Init(const char* resourceFileXML)
 		Model* model = resourceManager->loadModel(modelID);
 		Shader* shader = resourceManager->loadShader(shaderID);
 		std::vector<Texture*> textures;
-
+		
 		xml_node<>* pTextures = pNode->first_node("textures");
 		if (pTextures != 0) 
 		{
@@ -144,9 +187,9 @@ void SceneManager::Init(const char* resourceFileXML)
 				Texture* texture = resourceManager->loadTexture(textureID);
 				textures.push_back(texture);
 			}
-		}
+		}		
 
-		SceneObject* object = new SceneObject(id, color, position, rotation, scale, model, shader, textures, true);
+		SceneObject* object = new SceneObject(id, name, color, position, rotation, scale, model, shader, textures, true);
 		addOrRetrieveElement(sceneObjects, id, object);
 
 		std::cout << std::endl;
@@ -168,7 +211,7 @@ void SceneManager::Init(const char* resourceFileXML)
 	objectAxes.push_back(oy);
 	objectAxes.push_back(oz);
 
-	//Read objectaxes
+	//Read camaxes
 	ox.x = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OXColor")->first_node("r")->value());
 	ox.y = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OXColor")->first_node("g")->value());
 	ox.z = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OXColor")->first_node("b")->value());
@@ -178,10 +221,42 @@ void SceneManager::Init(const char* resourceFileXML)
 	oz.x = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OZColor")->first_node("r")->value());
 	oz.y = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OZColor")->first_node("g")->value());
 	oz.z = atof(pRoot->first_node("debugSettings")->first_node("camAxes")->first_node("OZColor")->first_node("b")->value());
-	objectAxes.push_back(ox);
-	objectAxes.push_back(oy);
-	objectAxes.push_back(oz);
+	camAxes.push_back(ox);
+	camAxes.push_back(oy);
+	camAxes.push_back(oz);
 
 
+
+}
+
+void SceneManager::moveActiveCameraOX(int sense)
+{
+	cameras[activeCamera] -> moveOx(sense);
+}
+
+void SceneManager::moveActiveCameraOY(int sense)
+{
+	cameras[activeCamera]->moveOy(sense);
+}
+
+void SceneManager::moveActiveCameraOZ(int sense)
+{
+	cameras[activeCamera]->moveOz(sense);
+}
+
+void SceneManager::rotateActiveCameraOX(int sense)
+{
+	cameras[activeCamera]->rotateOx(sense);
+}
+
+void SceneManager::rotateActiveCameraOY(int sense)
+{
+	cameras[activeCamera]->rotateOy(sense);
+
+}
+
+void SceneManager::rotateActiveCameraOZ(int sense)
+{
+	cameras[activeCamera]->rotateOz(sense);
 
 }

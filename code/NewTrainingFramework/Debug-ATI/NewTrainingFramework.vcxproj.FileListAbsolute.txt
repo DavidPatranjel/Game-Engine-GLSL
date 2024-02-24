@@ -1,0 +1,3 @@
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-ATI\NewTrainingFramework.vcxproj.MdMergeInputs.cache
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-ATI\NewTrainingFramework.vcxproj.cppwinrt_plat.cache
+D:\Faculta\GAMELOFT\Game-Engine-GLSL\code\NewTrainingFramework\Debug-ATI\NewTrainingFramework.vcxproj.cppwinrt_comp.cache

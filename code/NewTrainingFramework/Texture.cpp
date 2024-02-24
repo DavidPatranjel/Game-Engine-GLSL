@@ -11,6 +11,7 @@ void Texture::Load(char* folder)
 	char* array_pixels = LoadTGA(texturePath, &TWidth, &THeight, &TBBP);
 	delete[] texturePath;
 
+	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	///poate merg niste verificari in viitor
 	///aici nu merge... nu putem folosi char*

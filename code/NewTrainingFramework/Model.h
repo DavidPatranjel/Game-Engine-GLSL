@@ -10,7 +10,7 @@
 
 class Model
 {
-private:
+public:
 	ModelResource* mr;
 	GLuint indicesID, wiredID, verticesID;
 	int noIndices, noWiredIndices, noVertices;
@@ -21,7 +21,12 @@ public:
 	{
 		mr = model;
 	}
-	~Model() {};
+	~Model() 
+	{
+		glDeleteBuffers(1, &indicesID);
+		glDeleteBuffers(1, &wiredID);
+		glDeleteBuffers(1, &verticesID);
+	}
 	void Load(char* folder);
 	ModelResource* getResource()
 	{
