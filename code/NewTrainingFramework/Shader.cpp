@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Shader.h"
+#include <string>
 #define MAX_BUFFER 255
 
 int Shader::Load(char* folder)
@@ -35,7 +36,12 @@ int Shader::Load(char* folder)
 	matrixUniform = glGetUniformLocation(program, "u_rotation");
 	mMVP = glGetUniformLocation(program, "uMVP");
 	uvAttribute = glGetAttribLocation(program, "a_uv");
-	textureUniform = glGetUniformLocation(program, "uMVP");
+	uv2Attribute = glGetAttribLocation(program, "a_uv2");
+	for (int i = 0; i < MAX_TEXTURES; i++)
+	{ 
+		textureUniform[i] = glGetUniformLocation(program, ("u_texture_" + std::to_string(i)).c_str());
+	}
+	heightUniform = glGetUniformLocation(program, "u_height");
 
 	return 0;
 }
