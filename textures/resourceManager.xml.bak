@@ -28,7 +28,7 @@
 				<vs>modelShader.vs</vs>
 				<fs>modelShader.fs</fs>
 			</shader>
-			<shader id="3">
+			<shader id="8">
 				<vs>terrainShader.vs</vs>
 				<fs>terrainShader.fs</fs>
 			</shader>
@@ -46,21 +46,36 @@
 				<wrap_t>CLAMP_TO_EDGE</wrap_t>
 			</texture>
 			<texture id="14" type="2d">
-				<file>dirt.tga</file>			
+				<file>Dirt.tga</file>			
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
-				<wrap_s>CLAMP_TO_EDGE</wrap_s>
-				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+				<wrap_s>GL_REPEAT</wrap_s>
+				<wrap_t>GL_REPEAT</wrap_t>
 			</texture>
 			<texture id="15" type="2d">
-				<file>rock.tga</file>			
+				<file>Rock.tga</file>			
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
-				<wrap_s>CLAMP_TO_EDGE</wrap_s>
-				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+				<wrap_s>GL_REPEAT</wrap_s>
+				<wrap_t>GL_REPEAT</wrap_t>
 			</texture>		
+			<texture id="16" type="2d">
+				<file>Grass.tga</file>			
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>GL_REPEAT</wrap_s>
+				<wrap_t>GL_REPEAT</wrap_t>
+			</texture>
+			<texture id="17" type="2d">
+				<file>Terrain_blend.tga</file>			
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>GL_REPEAT</wrap_s>
+				<wrap_t>GL_REPEAT</wrap_t>
+			</texture>		
+		
 			<texture id="5" type="2d">
-				<file>bus.tga</file>
+				<file>Bus.tga</file>
 				<min_filter>LINEAR</min_filter>
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>

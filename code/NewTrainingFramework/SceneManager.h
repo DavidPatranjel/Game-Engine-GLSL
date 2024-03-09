@@ -10,6 +10,8 @@ private:
 	static SceneManager* spInstance;
 	SceneManager() {};
 	float totalTime = 0.0f;
+	float dx = 0.0f, dz = 0.0f;
+	float dim = 0.0f;
 
 	char* gameName;
 	int screenWidth, screenHeight;
@@ -18,6 +20,7 @@ private:
 
 	std::unordered_map<int, Camera*> cameras;
 	int activeCamera;
+	int mainTerrain = 0;
 	std::unordered_map<int, SceneObject*> sceneObjects;
 	std::vector<Vector3> objectAxes, camAxes;
 

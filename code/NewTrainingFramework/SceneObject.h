@@ -7,7 +7,11 @@
 
 class SceneObject
 {
-private:
+
+public:
+	Matrix modelMatrix;
+
+protected:
 	int id;
 	Vector3 color, position, rotation, scale;
 	Model* model;
@@ -15,12 +19,15 @@ private:
 	std::vector<Texture*> texture;
 	std::string name;
 	bool depthTest;
-	Matrix modelMatrix;
 
 public:
 	SceneObject(int objectId, const std::string& _name, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
 		Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest);
-	void Draw(Camera* activeCamera, ESContext* esContext);
-
+	virtual void Draw(Camera* activeCamera, ESContext* esContext);
+	void generalDraw(Camera* activeCamera, ESContext* esContext);
+	Vector3 getPosition();
+	virtual void updateXPos(float dist);
+	virtual void updateZPos(float dist);
+	void updateModelMatrix();
 };
 

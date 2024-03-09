@@ -58,6 +58,8 @@
 			<textures>
 				<texture id="14"/>
 				<texture id="15"/>
+				<texture id="16"/>
+				<texture id="17"/>
 				<!-- TO DO adaugati texturile-->
 			</textures>
 			<position>

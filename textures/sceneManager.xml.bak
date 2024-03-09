@@ -84,7 +84,7 @@
 			<model>1</model>
 			<shader>10</shader>
 			<type>normal</type>
-			<name>Crocodil_verde</name>
+			<name>Crocodil_verde_unu</name>
 			<textures>
 				<texture id="4"/>
 			</textures>
@@ -99,9 +99,9 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
+				<x>0.1</x>
+				<y>0.1</y>
+				<z>0.1</z>
 			</scale>
 			<!--
 			Exemple de alte configurari care vor fi adaugate si parsate mai tarziu (pentru taskuri ulterioare)
@@ -148,9 +148,9 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
+				<x>0.1</x>
+				<y>0.1</y>
+				<z>0.1</z>
 			</scale>
 			<!--
 			Exemple de alte configurari care vor fi adaugate si parsate mai tarziu (pentru taskuri ulterioare)
@@ -197,9 +197,9 @@
 				<z>0</z>
 			</rotation>
 			<scale>
-				<x>1.0</x>
-				<y>1.0</y>
-				<z>1.0</z>
+				<x>0.1</x>
+				<y>0.1</y>
+				<z>0.1</z>
 			</scale>
 			<!--
 			Exemple de alte configurari care vor fi adaugate si parsate mai tarziu (pentru taskuri ulterioare)
@@ -224,6 +224,41 @@
 				<light>1</light>
 			</lights>
 			-->
+		</object>
+		<object id="8">
+			<model>generated</model>
+			<shader>8</shader>
+			<type>terrain</type>
+			<name>Teren</name>
+			<N>4</N>
+			<D>100</D>
+			<textures>
+				<texture id="14"/>
+				<texture id="15"/>
+				<texture id="16"/>
+				<texture id="17"/>
+				<!-- TO DO adaugati texturile-->
+			</textures>
+			<position>
+				<x>0</x>
+				<y>-25.4</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>0.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>1.0</x>
+				<y>1.0</y>
+				<z>1.0</z>
+			</scale>
+			<height>
+				<r>25</r>
+				<g>5</g>
+				<b>-25</b>
+			</height>
 		</object>
 		
 		

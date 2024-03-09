@@ -28,15 +28,20 @@ public:
 		glDeleteBuffers(1, &verticesID);
 	}
 	void Load(char* folder);
+	void LoadTerrain(Vector3 offset, int N, float D);
+	void generateModel(Vector3 offset, int N, float D);
 	ModelResource* getResource()
 	{
 		return mr;
 	}
+
+	void updateUVX(float duv);
+	void updateUVZ(float duv);
 private:
 	Vertex parseIndexLine(const std::string& line);
 	Vertex parseVertexLine(const std::string& line);
 	void parseFile(const std::string& filename, std::vector<Vertex>& vertices, std::vector<unsigned short>& indices, int& numVertices, int& numIndices);
 	void writeVerticesAndIndices(const std::vector<Vertex>& vertices, const std::vector<unsigned short>& indices);
-
+	void bindBuffers();
 };
 

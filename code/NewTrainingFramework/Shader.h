@@ -2,6 +2,8 @@
 #include "ShaderResource.h"
 #include "../Utilities/utilities.h"
 
+const int MAX_TEXTURES = 5;
+
 class Shader
 {
 public:
@@ -13,7 +15,9 @@ public:
 	GLint matrixUniform;
 	GLint mMVP;
 	GLint uvAttribute;
-	GLint textureUniform;
+	GLint uv2Attribute;
+	GLint textureUniform[MAX_TEXTURES];
+	GLint heightUniform;
 
 public:
 	Shader(ShaderResource* shader) 

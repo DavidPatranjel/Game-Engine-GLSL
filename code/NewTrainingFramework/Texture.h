@@ -12,7 +12,8 @@ public:
 	std::unordered_map<std::string, int> textureData = {
 		{"LINEAR", GL_LINEAR},
 		{"NEAREST", GL_NEAREST},
-		{"CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE}
+		{"CLAMP_TO_EDGE", GL_CLAMP_TO_EDGE},
+		{"GL_REPEAT", GL_REPEAT}
 	};
 public:
 	Texture(TextureResource* texture)
