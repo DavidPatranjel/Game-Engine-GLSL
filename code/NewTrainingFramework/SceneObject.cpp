@@ -40,10 +40,10 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 		glUniformMatrix4fv(shader->mMVP, 1, GL_FALSE, (GLfloat*)mvp.m);
 	}
 
-		for (int i = 0; i < texture.size(); i++)
+	for (int i = 0; i < texture.size(); i++)
 	{		
 		glActiveTexture(GL_TEXTURE0 + i);
-		glBindTexture(GL_TEXTURE_2D, texture[i]->textureID);
+		glBindTexture(texture[i] ->textureType, texture[i]->textureID);
 		if (shader->textureUniform[i] != -1)
 		{
 			glUniform1i(shader->textureUniform[i], i);
@@ -84,6 +84,12 @@ void SceneObject::updateXPos(float dist)
 	updateModelMatrix();
 }
 
+void SceneObject::updateYPos(float dist)
+{
+	position.y += dist;
+	updateModelMatrix();
+}
+
 void SceneObject::updateZPos(float dist)
 {
 	position.z += dist;
@@ -98,5 +104,5 @@ void SceneObject::updateModelMatrix()
 	Matrix Rz; Rz.SetRotationZ(rotation.z);
 	Matrix S; S.SetScale(scale);
 
-	modelMatrix = T * Rz * Ry * Rx * S;
+	modelMatrix = S * Rx * Ry * Rz * T;
 }

@@ -27,6 +27,7 @@ public:
 	void generalDraw(Camera* activeCamera, ESContext* esContext);
 	Vector3 getPosition();
 	virtual void updateXPos(float dist);
+	virtual void updateYPos(float dist);
 	virtual void updateZPos(float dist);
 	void updateModelMatrix();
 };

@@ -20,7 +20,7 @@ private:
 
 	std::unordered_map<int, Camera*> cameras;
 	int activeCamera;
-	int mainTerrain = 0;
+	int mainTerrain = 0, mainSkybox = 0;
 	std::unordered_map<int, SceneObject*> sceneObjects;
 	std::vector<Vector3> objectAxes, camAxes;
 

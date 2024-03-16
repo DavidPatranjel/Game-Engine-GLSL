@@ -261,6 +261,36 @@
 			</height>
 		</object>
 		
+		<object id="9">
+			<model>9</model>
+			<shader>9</shader>
+			<type>skybox</type>
+			<name>Skybox</name>
+			<textures>
+				<texture id="9"/>
+				<!-- TO DO adaugati texturile-->
+			</textures>
+			<position>
+				<x>10</x>
+				<y>0</y>
+				<z>1</z>
+			</position>
+			<rotation>
+				<x>180.0</x>
+				<y>0.0</y>
+				<z>0.0</z>
+			</rotation>
+			<scale>
+				<x>1000.0</x>
+				<y>1000.0</y>
+				<z>1000.0</z>
+			</scale>
+			<followingcamera>
+				<ox/>
+				<oz/>	
+			</followingcamera>
+		</object>
+		
 		
 	</objects>
 	
