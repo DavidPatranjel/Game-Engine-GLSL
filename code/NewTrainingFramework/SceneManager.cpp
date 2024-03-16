@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 #include "Terrain.h"
+#include "Skybox.h"
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include <fstream>
 #include <sstream>
@@ -60,6 +61,23 @@ void SceneManager::Update(float deltaTime)
 			int translation = (dz > 0) ? dim : -dim;
 			sceneObjects[mainTerrain]->updateZPos(translation);
 		}
+	}
+
+	if (mainSkybox)
+	{
+		Vector3 skyboxPos = sceneObjects[mainSkybox]->getPosition();
+		Vector3 cameraPos = cameras[activeCamera]->position;
+		Vector3 skyboxCameraFollow = dynamic_cast<SkyBox*> (sceneObjects[mainSkybox])->followingCamera;
+
+		if (skyboxCameraFollow[0])
+			sceneObjects[mainSkybox]->updateXPos(cameraPos.x - skyboxPos.x);
+		
+		if (skyboxCameraFollow[1])
+			sceneObjects[mainSkybox]->updateYPos(cameraPos.y - skyboxPos.y);
+		
+		if (skyboxCameraFollow[2])
+			sceneObjects[mainSkybox]->updateZPos(cameraPos.z - skyboxPos.z);
+
 	}
 
 }
@@ -213,13 +231,7 @@ void SceneManager::Init(const char* resourceFileXML)
 		char* modelType = pNode->first_node("model")->value();
 		Model* model;
 		SceneObject* object;
-		if (std::strcmp(modelType, "generated"))
-		{
-			int modelID = std::stoi(modelType);
-			model = resourceManager->loadModel(modelID);
-			object = new SceneObject(id, name, color, position, rotation, scale, model, shader, textures, wiered);
-		}
-		else
+		if (!std::strcmp(type, "terrain"))
 		{
 			model = new Model(nullptr);
 			int N = std::stoi(pNode->first_node("N")->value());
@@ -232,6 +244,34 @@ void SceneManager::Init(const char* resourceFileXML)
 			model->LoadTerrain(cameras[activeCamera]->position, N, dim);
 			object = new Terrain(id, name, color, position, rotation, scale, model, shader, textures, wiered, N, dim, h);
 			mainTerrain = id;
+		}
+		else if (!std::strcmp(type, "skybox"))
+		{
+			int modelID = std::stoi(modelType);
+			model = resourceManager->loadModel(modelID);
+
+			Vector3 followingcamera;
+			followingcamera.x = 0; followingcamera.y = 0; followingcamera.z = 0;
+
+			xml_node<>* pFollCam = pNode->first_node("followingcamera");
+			if (pFollCam != 0)
+			{
+				xml_node<>* pFCX = pFollCam->first_node("ox");
+				if (pFCX != 0) followingcamera.x = 1;
+				xml_node<>* pFCY = pFollCam->first_node("oy");
+				if (pFCY != 0) followingcamera.y = 1;
+				xml_node<>* pFCZ = pFollCam->first_node("oz");
+				if (pFCZ != 0) followingcamera.z = 1;
+			}
+
+			object = new SkyBox(id, name, color, position, rotation, scale, model, shader, textures, wiered, followingcamera);
+			mainSkybox = id;
+		}
+		else
+		{
+			int modelID = std::stoi(modelType);
+			model = resourceManager->loadModel(modelID);
+			object = new SceneObject(id, name, color, position, rotation, scale, model, shader, textures, wiered);
 		}
 
 		addOrRetrieveElement(sceneObjects, id, object);
