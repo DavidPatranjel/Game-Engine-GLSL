@@ -103,29 +103,6 @@
 				<y>0.1</y>
 				<z>0.1</z>
 			</scale>
-			<!--
-			Exemple de alte configurari care vor fi adaugate si parsate mai tarziu (pentru taskuri ulterioare)
-			<followingCamera>
-				<cameras>
-					<camera>1</camera>
-				</cameras>
-				<ox/>
-				<oy/>
-				<oz/>
-			</followingCamera>
-			<trajectory type="linear" iteration="infinite" direction="alternate">
-				<comment>startPoint e chiar Pos</comment>
-				<endPoint>
-					<x>0.5</x>
-					<y>100.0</y>
-					<z>1.0</z>				
-				</endPoint>
-				<speed>0.1</speed>
-			</trajectory>
-			<lights>
-				<light>1</light>
-			</lights>
-			-->
 		</object>
 		
 		<object id="5">
@@ -187,9 +164,9 @@
 				<texture id="4"/>
 			</textures>
 			<position>
-				<x>20.5</x>
-				<y>27</y>
-				<z>-100.22</z>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -201,29 +178,6 @@
 				<y>0.1</y>
 				<z>0.1</z>
 			</scale>
-			<!--
-			Exemple de alte configurari care vor fi adaugate si parsate mai tarziu (pentru taskuri ulterioare)
-			<followingCamera>
-				<cameras>
-					<camera>1</camera>
-				</cameras>
-				<ox/>
-				<oy/>
-				<oz/>
-			</followingCamera>
-			<trajectory type="linear" iteration="infinite" direction="alternate">
-				<comment>startPoint e chiar Pos</comment>
-				<endPoint>
-					<x>0.5</x>
-					<y>100.0</y>
-					<z>1.0</z>				
-				</endPoint>
-				<speed>0.1</speed>
-			</trajectory>
-			<lights>
-				<light>1</light>
-			</lights>
-			-->
 		</object>
 		<object id="8">
 			<model>generated</model>
@@ -272,7 +226,7 @@
 			</textures>
 			<position>
 				<x>10</x>
-				<y>0</y>
+				<y>950</y>
 				<z>1</z>
 			</position>
 			<rotation>
@@ -293,7 +247,15 @@
 		
 		
 	</objects>
-	
+	<fog>
+		<color>
+			<r>0.235</r>
+			<g>0.266</g>
+			<b>0.333</b>
+		</color>
+		<r>30</r>
+		<R>80</R>
+	</fog>
 	<!--
 	<ambientalLight>
 		<color>

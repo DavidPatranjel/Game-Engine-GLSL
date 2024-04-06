@@ -7,7 +7,6 @@
 
 class SceneObject
 {
-
 public:
 	Matrix modelMatrix;
 

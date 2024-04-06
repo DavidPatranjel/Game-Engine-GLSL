@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fog.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="KBInput.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -187,6 +188,7 @@
     <ClCompile Include="TextureResource.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fog.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="KBInput.h" />
     <ClInclude Include="Model.h" />

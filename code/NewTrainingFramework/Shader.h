@@ -18,6 +18,12 @@ public:
 	GLint uv2Attribute;
 	GLint textureUniform[MAX_TEXTURES];
 	GLint heightUniform;
+	GLint rFogUniform;
+	GLint RFogUniform;
+	GLint colorFogUniform;	
+	GLint posCameraUniform;
+	GLint mMUniform, mVUniform;
+	
 
 public:
 	Shader(ShaderResource* shader) 

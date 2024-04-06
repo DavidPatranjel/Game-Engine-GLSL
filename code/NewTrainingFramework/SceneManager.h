@@ -2,7 +2,9 @@
 #include <vector>
 #include "SceneObject.h"
 #include "KBInput.h"
+#include "Fog.h"
 #include "../Utilities/utilities.h"
+
 
 class SceneManager
 {
@@ -17,15 +19,16 @@ private:
 	int screenWidth, screenHeight;
 	Vector3 backgroundColor;
 	//controls?
-
 	std::unordered_map<int, Camera*> cameras;
 	int activeCamera;
 	int mainTerrain = 0, mainSkybox = 0;
-	std::unordered_map<int, SceneObject*> sceneObjects;
+	std::unordered_map<int, SceneObject* > sceneObjects;
 	std::vector<Vector3> objectAxes, camAxes;
 
 public:
 	KBInput* keyboardInput;
+	Fog* fog;
+	
 	//std::vector<Lights*> lights; 
 public:
 	static SceneManager* getInstance();
@@ -57,6 +60,8 @@ public:
 	{
 		return keyboardInput;
 	}
+
+	Vector3 getCameraPosition();
 
 	void moveActiveCameraOX(int sense);
 	void moveActiveCameraOY(int sense);
