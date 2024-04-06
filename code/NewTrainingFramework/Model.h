@@ -44,4 +44,3 @@ private:
 	void writeVerticesAndIndices(const std::vector<Vertex>& vertices, const std::vector<unsigned short>& indices);
 	void bindBuffers();
 };
-

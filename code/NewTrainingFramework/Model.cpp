@@ -2,6 +2,7 @@
 #include "Model.h"
 #define MAX_BUFFER 255
 
+
 void Model::Load(char* folder)
 {
 	char* filePath = new char[MAX_BUFFER];

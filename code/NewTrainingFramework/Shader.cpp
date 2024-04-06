@@ -42,6 +42,12 @@ int Shader::Load(char* folder)
 		textureUniform[i] = glGetUniformLocation(program, ("u_texture_" + std::to_string(i)).c_str());
 	}
 	heightUniform = glGetUniformLocation(program, "u_height");
+	rFogUniform = glGetUniformLocation(program, "u_r");
+	RFogUniform = glGetUniformLocation(program, "u_R");
+	colorFogUniform = glGetUniformLocation(program, "u_fog_color");
+	posCameraUniform = glGetUniformLocation(program, "u_pos_camera");
+	mMUniform = glGetUniformLocation(program, "uM");
+	mVUniform = glGetUniformLocation(program, "uV");
 
 	return 0;
 }

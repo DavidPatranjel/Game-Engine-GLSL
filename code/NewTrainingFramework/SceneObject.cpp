@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "SceneObject.h"
 #include "Shader.h"
+#include "SceneManager.h"
 
 SceneObject::SceneObject(int objectId, const std::string& _name, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
 	Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest)
@@ -40,6 +41,27 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 		glUniformMatrix4fv(shader->mMVP, 1, GL_FALSE, (GLfloat*)mvp.m);
 	}
 
+	if (shader->rFogUniform != -1)
+	{
+		glUniform1f(shader->rFogUniform, SceneManager::getInstance()->fog->r);
+	}
+
+	if (shader->RFogUniform != -1)
+	{
+		glUniform1f(shader->RFogUniform, SceneManager::getInstance()->fog->R);
+	}
+
+	if (shader->colorFogUniform != -1)
+	{
+		glUniform3f(shader->colorFogUniform, SceneManager::getInstance()->fog->color.x, SceneManager::getInstance()->fog->color.y, SceneManager::getInstance()->fog->color.z);
+	}
+
+	if (shader->posCameraUniform != -1)
+	{
+		Vector3 campos = activeCamera->position;
+		glUniform3f(shader->posCameraUniform, campos.x, campos.y, campos.z);
+	}
+
 	for (int i = 0; i < texture.size(); i++)
 	{		
 		glActiveTexture(GL_TEXTURE0 + i);
@@ -50,6 +72,15 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 		}
 	}
 
+	if (shader->mMUniform != -1)
+	{
+		glUniformMatrix4fv(shader->mMUniform, 1, GL_FALSE, (GLfloat*)modelMatrix.m);
+	}
+
+	if (shader->mVUniform != -1)
+	{
+		glUniformMatrix4fv(shader->mVUniform, 1, GL_FALSE, (GLfloat*)activeCamera->viewMatrix.m);
+	}
 
 }
 

@@ -278,6 +278,19 @@ void SceneManager::Init(const char* resourceFileXML)
 
 	}
 	
+	//Read fog
+	xml_node<>* pFog = pRoot->first_node("fog");
+	if (pFog != 0)
+	{
+		Vector3 color;
+		color.x = (GLfloat)atof(pFog -> first_node("color")->first_node("r")->value());
+		color.y = (GLfloat)atof(pFog->first_node("color")->first_node("g")->value());
+		color.z = (GLfloat)atof(pFog->first_node("color")->first_node("b")->value());
+		float r = atof(pFog->first_node("r")->value());
+		float R = atof(pFog->first_node("R")->value());
+		fog = new Fog(color, r, R);
+	}
+
 	//Read debugsettings
 	//Read objectaxes
 	Vector3 ox, oy, oz;
@@ -307,10 +320,13 @@ void SceneManager::Init(const char* resourceFileXML)
 	camAxes.push_back(ox);
 	camAxes.push_back(oy);
 	camAxes.push_back(oz);
-
-
-
 }
+
+Vector3 SceneManager::getCameraPosition()
+{
+	return cameras[activeCamera] -> position;
+}
+
 
 void SceneManager::moveActiveCameraOX(int sense)
 {
