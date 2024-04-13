@@ -35,6 +35,12 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 		glVertexAttribPointer(shader->uvAttribute, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3) * 5));
 	}
 
+	if (shader->normVecAtribute != -1)
+	{
+		glEnableVertexAttribArray(shader->normVecAtribute);
+		glVertexAttribPointer(shader->normVecAtribute, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(sizeof(Vector3) * 2));
+	}
+
 	if (shader->mMVP != -1)
 	{
 		Matrix mvp = modelMatrix * activeCamera->viewMatrix * activeCamera->perspectiveMatrix;

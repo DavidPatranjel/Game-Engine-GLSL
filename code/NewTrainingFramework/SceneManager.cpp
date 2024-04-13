@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "Terrain.h"
 #include "Skybox.h"
+#include "SkyboxReflectionObject.h"
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include <fstream>
 #include <sstream>
@@ -182,9 +183,11 @@ void SceneManager::Init(const char* resourceFileXML)
 		std::string name = pNode->first_node("name")->value();
 		int shaderID = std::stoi(pNode->first_node("shader")->value());
 		char* type = pNode->first_node("type")->value();
+		
 		xml_node<>* pWiered = pNode->first_node("wired");
 		bool wiered = true;
 		if (pWiered == 0) wiered = false;
+
 		Vector3 color, position, rotation, scale;
 		xml_node<>* pColor = pNode->first_node("color");
 		if (pColor) 
@@ -266,6 +269,17 @@ void SceneManager::Init(const char* resourceFileXML)
 
 			object = new SkyBox(id, name, color, position, rotation, scale, model, shader, textures, wiered, followingcamera);
 			mainSkybox = id;
+		}
+		else if (!std::strcmp(type, "skybox_reflected"))
+		{
+			int modelID = std::stoi(modelType);
+			model = resourceManager->loadModel(modelID);
+
+			float alphaReflection = 0.0f;
+			xml_node<>* pReflection = pNode->first_node("reflection");
+			if (pReflection != 0) alphaReflection = (GLfloat)atof(pReflection->value());
+			object = new SkyboxReflectionObject(id, name, color, position, rotation, scale, model, shader, textures, wiered, alphaReflection);
+
 		}
 		else
 		{

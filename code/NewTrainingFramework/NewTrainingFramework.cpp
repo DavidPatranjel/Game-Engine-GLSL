@@ -6,8 +6,6 @@
 #include "../Utilities/TGA.h"
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include "Vertex.h"
-#include "Shaders.h"
-#include "Shaders.h"
 #include "ResourceManager.h"
 #include "SceneManager.h"
 #include <conio.h>

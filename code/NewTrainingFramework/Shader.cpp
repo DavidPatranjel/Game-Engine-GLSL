@@ -37,6 +37,8 @@ int Shader::Load(char* folder)
 	mMVP = glGetUniformLocation(program, "uMVP");
 	uvAttribute = glGetAttribLocation(program, "a_uv");
 	uv2Attribute = glGetAttribLocation(program, "a_uv2");
+	normVecAtribute = glGetAttribLocation(program, "a_normv");
+
 	for (int i = 0; i < MAX_TEXTURES; i++)
 	{ 
 		textureUniform[i] = glGetUniformLocation(program, ("u_texture_" + std::to_string(i)).c_str());
@@ -48,7 +50,7 @@ int Shader::Load(char* folder)
 	posCameraUniform = glGetUniformLocation(program, "u_pos_camera");
 	mMUniform = glGetUniformLocation(program, "uM");
 	mVUniform = glGetUniformLocation(program, "uV");
-
+	alphaReflectionUniform = glGetUniformLocation(program, "u_alpha_reflection");
 	return 0;
 }
 
