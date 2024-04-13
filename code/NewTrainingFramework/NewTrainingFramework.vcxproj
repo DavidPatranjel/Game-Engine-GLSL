@@ -175,8 +175,8 @@
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderResource.cpp" />
-    <ClCompile Include="Shaders.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SkyboxReflectionObject.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-ATI|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">Create</PrecompiledHeader>
@@ -198,8 +198,8 @@
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderResource.h" />
-    <ClInclude Include="Shaders.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SkyboxReflectionObject.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />

@@ -16,6 +16,7 @@ public:
 	GLint mMVP;
 	GLint uvAttribute;
 	GLint uv2Attribute;
+	GLint normVecAtribute;
 	GLint textureUniform[MAX_TEXTURES];
 	GLint heightUniform;
 	GLint rFogUniform;
@@ -23,6 +24,7 @@ public:
 	GLint colorFogUniform;	
 	GLint posCameraUniform;
 	GLint mMUniform, mVUniform;
+	GLint alphaReflectionUniform;
 	
 
 public:

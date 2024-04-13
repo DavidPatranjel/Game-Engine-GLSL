@@ -39,6 +39,10 @@
 				<vs>skyboxShader.vs</vs>
 				<fs>skyboxShader.fs</fs>
 			</shader>
+			<shader id="11">
+				<vs>modelShaderReflection.vs</vs>
+				<fs>modelShaderReflection.fs</fs>
+			</shader>
 		<!-- si aici se adauga toate shaderele -->
 		</folder>
 		

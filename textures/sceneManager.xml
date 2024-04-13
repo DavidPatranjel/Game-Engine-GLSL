@@ -179,6 +179,58 @@
 				<z>0.1</z>
 			</scale>
 		</object>
+		<object id="3">
+			<model>1</model>
+			<shader>11</shader>
+			<type>skybox_reflected</type>
+			<reflection>0.5</reflection>
+			<name>Crocodil_verde_trei</name>
+			<textures>
+				<texture id="4"/>
+				<texture id="9"/>
+			</textures>
+			<position>
+				<x>50</x>
+				<y>50</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>90</x>
+				<y>90</y>
+				<z>0</z>
+			</rotation>
+			<scale>
+				<x>0.09</x>
+				<y>0.09</y>
+				<z>0.09</z>
+			</scale>
+		</object>
+		<object id="4">
+			<model>1</model>
+			<shader>11</shader>
+			<type>skybox_reflected</type>
+			<reflection>1.0</reflection>
+			<name>Crocodil_verde_patru</name>
+			<textures>
+				<texture id="4"/>
+				<texture id="9"/>
+			</textures>
+			<position>
+				<x>50</x>
+				<y>0</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>90</y>
+				<z>90</z>
+			</rotation>
+			<scale>
+				<x>0.15</x>
+				<y>0.15</y>
+				<z>0.15</z>
+			</scale>
+		</object>
 		<object id="8">
 			<model>generated</model>
 			<shader>8</shader>
@@ -254,7 +306,7 @@
 			<b>0.333</b>
 		</color>
 		<r>30</r>
-		<R>80</R>
+		<R>800</R>
 	</fog>
 	<!--
 	<ambientalLight>
