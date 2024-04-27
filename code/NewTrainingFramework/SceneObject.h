@@ -23,6 +23,7 @@ public:
 	SceneObject(int objectId, const std::string& _name, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
 		Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest);
 	virtual void Draw(Camera* activeCamera, ESContext* esContext);
+	virtual void Update();
 	void generalDraw(Camera* activeCamera, ESContext* esContext);
 	Vector3 getPosition();
 	virtual void updateXPos(float dist);

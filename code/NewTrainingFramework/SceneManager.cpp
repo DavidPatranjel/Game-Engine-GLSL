@@ -3,6 +3,7 @@
 #include "Terrain.h"
 #include "Skybox.h"
 #include "SkyboxReflectionObject.h"
+#include "Fire.h"
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include <fstream>
 #include <sstream>
@@ -35,6 +36,9 @@ void SceneManager::freeResources()
 
 void SceneManager::Update(float deltaTime)
 {
+	for (const auto& pair : sceneObjects) {
+		pair.second->Update();
+	}
 	totalTime += deltaTime;
 	if (totalTime > Globals::frameTime)
 	{
@@ -279,6 +283,16 @@ void SceneManager::Init(const char* resourceFileXML)
 			xml_node<>* pReflection = pNode->first_node("reflection");
 			if (pReflection != 0) alphaReflection = (GLfloat)atof(pReflection->value());
 			object = new SkyboxReflectionObject(id, name, color, position, rotation, scale, model, shader, textures, wiered, alphaReflection);
+
+		}
+		else if (!std::strcmp(type, "fire"))
+		{
+			int modelID = std::stoi(modelType);
+			model = resourceManager->loadModel(modelID);
+			float dispmax = 0.0f;
+			xml_node<>* pDispMax = pNode->first_node("dispmax");
+			if (pDispMax != 0) dispmax = (GLfloat)atof(pDispMax->value());
+			object = new Fire(id, name, color, position, rotation, scale, model, shader, textures, wiered, dispmax);
 
 		}
 		else

@@ -90,6 +90,10 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 
 }
 
+void SceneObject::Update()
+{
+
+}
 
 
 void SceneObject::Draw(Camera* activeCamera, ESContext* esContext)

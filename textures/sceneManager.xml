@@ -165,8 +165,8 @@
 			</textures>
 			<position>
 				<x>0</x>
-				<y>0</y>
-				<z>0</z>
+				<y>200</y>
+				<z>200</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -229,6 +229,33 @@
 				<x>0.15</x>
 				<y>0.15</y>
 				<z>0.15</z>
+			</scale>
+		</object>
+		<object id="40">
+			<model>13</model>
+			<shader>13</shader>
+			<type>fire</type>
+			<name>Foc_unu</name>
+			<textures>
+				<texture id="20"/>
+				<texture id="21"/>
+				<texture id="22"/>
+			</textures>
+			<dispmax>0.5</dispmax>
+			<position>
+				<x>-30</x>
+				<y>0</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>-90</z>
+			</rotation>
+			<scale>
+				<x>3.5</x>
+				<y>3.5</y>
+				<z>3.5</z>
 			</scale>
 		</object>
 		<object id="8">
@@ -306,9 +333,9 @@
 			<b>0.333</b>
 		</color>
 		<r>30</r>
-		<R>800</R>
+		<R>80</R>
 	</fog>
-	<!--
+	
 	<ambientalLight>
 		<color>
 			<r>1.0</r>
@@ -334,7 +361,7 @@
 			<type>point</type>
 		</light>
 	</lights>
-	-->
+
 	<debugSettings>
 		<objectAxes>
 			<OXColor>
