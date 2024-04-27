@@ -164,6 +164,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Fog.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="KBInput.cpp" />
@@ -188,6 +189,7 @@
     <ClCompile Include="TextureResource.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fire.h" />
     <ClInclude Include="Fog.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="KBInput.h" />

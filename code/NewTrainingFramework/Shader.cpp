@@ -51,6 +51,10 @@ int Shader::Load(char* folder)
 	mMUniform = glGetUniformLocation(program, "uM");
 	mVUniform = glGetUniformLocation(program, "uV");
 	alphaReflectionUniform = glGetUniformLocation(program, "u_alpha_reflection");
+	timeUniform = glGetUniformLocation(program, "u_time");
+	dispMaxUniform = glGetUniformLocation(program, "u_DispMax");
+
+
 	return 0;
 }
 

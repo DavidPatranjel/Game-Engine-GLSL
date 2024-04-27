@@ -25,6 +25,7 @@ public:
 	GLint posCameraUniform;
 	GLint mMUniform, mVUniform;
 	GLint alphaReflectionUniform;
+	GLint timeUniform, dispMaxUniform;
 	
 
 public:

@@ -14,6 +14,9 @@
 			<model id="9">
 				<file>SkyBox.nfg</file>
 			</model>
+			<model id="13">
+				<file>fire.nfg</file>
+			</model>
 		</folder>
 
 		<!-- un tag folder doar specifica folderul comun pentru un grup de modele (pot sa le am in mai multe foldere)
@@ -42,6 +45,10 @@
 			<shader id="11">
 				<vs>modelShaderReflection.vs</vs>
 				<fs>modelShaderReflection.fs</fs>
+			</shader>
+			<shader id="13">
+				<vs>fireShader.vs</vs>
+				<fs>fireShader.fs</fs>
 			</shader>
 		<!-- si aici se adauga toate shaderele -->
 		</folder>
@@ -98,6 +105,27 @@
 				<mag_filter>LINEAR</mag_filter>
 				<wrap_s>CLAMP_TO_EDGE</wrap_s>
 				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+			<texture id="21" type="2d">
+				<file>fire_mask.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+			<texture id="20" type="2d">
+				<file>fire3.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>CLAMP_TO_EDGE</wrap_s>
+				<wrap_t>CLAMP_TO_EDGE</wrap_t>
+			</texture>
+			<texture id="22" type="2d">
+				<file>DisplacementMap.tga</file>
+				<min_filter>LINEAR</min_filter>
+				<mag_filter>LINEAR</mag_filter>
+				<wrap_s>GL_REPEAT</wrap_s>
+				<wrap_t>GL_REPEAT</wrap_t>
 			</texture>
 			<!-- si aici se adauga toate texturile -->
 		</folder>
