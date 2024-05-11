@@ -164,13 +164,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Fire.cpp" />
     <ClCompile Include="Fog.cpp" />
     <ClCompile Include="Globals.cpp" />
     <ClCompile Include="KBInput.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelResource.cpp" />
     <ClCompile Include="NewTrainingFramework.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
@@ -178,6 +181,7 @@
     <ClCompile Include="ShaderResource.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SkyboxReflectionObject.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-ATI|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug-Nvidia|Win32'">Create</PrecompiledHeader>
@@ -189,12 +193,15 @@
     <ClCompile Include="TextureResource.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Fire.h" />
     <ClInclude Include="Fog.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="KBInput.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelResource.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
@@ -202,6 +209,7 @@
     <ClInclude Include="ShaderResource.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SkyboxReflectionObject.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Terrain.h" />

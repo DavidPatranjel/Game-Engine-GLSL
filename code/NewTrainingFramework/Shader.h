@@ -26,7 +26,11 @@ public:
 	GLint mMUniform, mVUniform;
 	GLint alphaReflectionUniform;
 	GLint timeUniform, dispMaxUniform;
-	
+
+	GLint typeUniform;
+	GLint lightPosition, lightDirection, angleUniform;
+	GLint lightDiffUnifrom, lightSpecUniform, specPowerUniform;
+	GLint ambientColorUniform, ratioUniform;
 
 public:
 	Shader(ShaderResource* shader) 

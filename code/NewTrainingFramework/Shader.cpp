@@ -54,6 +54,17 @@ int Shader::Load(char* folder)
 	timeUniform = glGetUniformLocation(program, "u_time");
 	dispMaxUniform = glGetUniformLocation(program, "u_DispMax");
 
+	typeUniform = glGetUniformLocation(program, "type");
+	lightPosition = glGetUniformLocation(program, "u_pos_light");
+	lightDirection = glGetUniformLocation(program, "u_direction_light");
+	angleUniform = glGetUniformLocation(program, "u_angle");
+	lightDiffUnifrom = glGetUniformLocation(program, "c_lightDiff");
+	lightSpecUniform = glGetUniformLocation(program, "c_lightSpec");
+	specPowerUniform = glGetUniformLocation(program, "SpecPower");
+	ambientColorUniform = glGetUniformLocation(program, "c_amb");
+	ratioUniform = glGetUniformLocation(program, "ratio");
+
+
 
 	return 0;
 }

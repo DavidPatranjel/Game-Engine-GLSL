@@ -165,8 +165,8 @@
 			</textures>
 			<position>
 				<x>0</x>
-				<y>200</y>
-				<z>200</z>
+				<y>20</y>
+				<z>-20</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -332,8 +332,8 @@
 			<g>0.266</g>
 			<b>0.333</b>
 		</color>
-		<r>30</r>
-		<R>80</R>
+		<r>60</r>
+		<R>150</R>
 	</fog>
 	
 	<ambientalLight>
@@ -346,8 +346,7 @@
 	</ambientalLight>
 	
 	<lights>
-		<light id="1">
-			<associatedObject>2</associatedObject>
+	<light id="1">
 			<diffuseColor>
 				<r>1.0</r>
 				<g>1.0</g>
@@ -358,8 +357,62 @@
 				<g>1.0</g>
 				<b>1.0</b>
 			</specularColor>
+			<position>
+				<x>3.0</x>
+				<y>30.0</y>
+				<z>3.0</z>
+			</position>
+			<specPower>4.0</specPower>
 			<type>point</type>
 		</light>
+	<light id="2">
+			<diffuseColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</diffuseColor>
+			<specularColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</specularColor>
+			<direction>
+				<x>-10.0</x>
+				<y>-10.0</y>
+				<z>-10.0</z>
+			</direction>
+			<specPower>4.0</specPower>
+			<type>directional</type>
+		</light>
+		<light id="3">
+			<diffuseColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</diffuseColor>
+			<specularColor>
+				<r>1.0</r>
+				<g>1.0</g>
+				<b>1.0</b>
+			</specularColor>
+			<position>
+				<x>20.5</x>
+				<y>40</y>
+				<z>21.22</z>
+			</position>
+			<direction>
+				<x>0.0</x>
+				<y>-10.0</y>
+				<z>0.0</z>
+			</direction>
+			<angle>10.0</angle>
+			<specPower>1.0</specPower>
+			<type>spotlight</type>
+		</light>
+		
+		
+		
+		
 	</lights>
 
 	<debugSettings>
