@@ -4,7 +4,13 @@
 #include "KBInput.h"
 #include "Fog.h"
 #include "../Utilities/utilities.h"
+#include "Light.h"
 
+struct AmbientLight
+{
+	Vector3 ambientColor;
+	float ratio;
+};
 
 class SceneManager
 {
@@ -18,7 +24,7 @@ private:
 	char* gameName;
 	int screenWidth, screenHeight;
 	Vector3 backgroundColor;
-	//controls?
+
 	std::unordered_map<int, Camera*> cameras;
 	int activeCamera;
 	int mainTerrain = 0, mainSkybox = 0;
@@ -26,6 +32,8 @@ private:
 	std::vector<Vector3> objectAxes, camAxes;
 
 public:
+	std::vector<Light*> lights;
+	AmbientLight ambientLight;
 	KBInput* keyboardInput;
 	Fog* fog;
 	
@@ -70,7 +78,6 @@ public:
 	void rotateActiveCameraOX(int sense);
 	void rotateActiveCameraOY(int sense);
 	void rotateActiveCameraOZ(int sense);
-
 private:
 	float toRadians(float n) {
 		return n * 3.1415 / 180;

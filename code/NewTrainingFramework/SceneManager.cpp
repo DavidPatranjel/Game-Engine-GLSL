@@ -4,6 +4,9 @@
 #include "Skybox.h"
 #include "SkyboxReflectionObject.h"
 #include "Fire.h"
+#include "SpotLight.h"
+#include "DirectionalLight.h"
+#include "PointLight.h"
 #include "../rapidxml-1.13/rapidxml.hpp"
 #include <fstream>
 #include <sstream>
@@ -244,9 +247,9 @@ void SceneManager::Init(const char* resourceFileXML)
 			int N = std::stoi(pNode->first_node("N")->value());
 			dim = (GLfloat)atof(pNode->first_node("D")->value());
 			xml_node<>* pHeights = pNode->first_node("height");
-			int r = std::atoi(pHeights->first_node("r")->value());
-			int g = std::atoi(pHeights->first_node("g")->value());
-			int b = std::atoi(pHeights->first_node("b")->value());
+			float r = (GLfloat)atof(pHeights->first_node("r")->value());
+			float g = (GLfloat)atof(pHeights->first_node("g")->value());
+			float b = (GLfloat)atof(pHeights->first_node("b")->value());
 			Vector3 h(r, g, b);
 			model->LoadTerrain(cameras[activeCamera]->position, N, dim);
 			object = new Terrain(id, name, color, position, rotation, scale, model, shader, textures, wiered, N, dim, h);
@@ -348,6 +351,67 @@ void SceneManager::Init(const char* resourceFileXML)
 	camAxes.push_back(ox);
 	camAxes.push_back(oy);
 	camAxes.push_back(oz);
+
+	//Read lights
+	xml_node<>* pAmbientLight = pRoot->first_node("ambientalLight");
+	ambientLight.ambientColor.x = (GLfloat)atof(pAmbientLight->first_node("color")->first_node("r")->value());
+	ambientLight.ambientColor.y = (GLfloat)atof(pAmbientLight->first_node("color")->first_node("g")->value());
+	ambientLight.ambientColor.z = (GLfloat)atof(pAmbientLight->first_node("color")->first_node("b")->value());
+	ambientLight.ratio = (GLfloat)atof(pAmbientLight->first_node("ratio")->value());
+
+	xml_node<>* pLights = pRoot->first_node("lights");
+	for (xml_node<>* pNode = pLights->first_node("light"); pNode; pNode = pNode->next_sibling())
+	{
+		int id = std::stoi(pNode->first_attribute("id")->value());
+		Vector3 diffuseColor, specularColor;
+		diffuseColor.x = (GLfloat)atof(pNode->first_node("diffuseColor")->first_node("r")->value());
+		diffuseColor.y = (GLfloat)atof(pNode->first_node("diffuseColor")->first_node("g")->value());
+		diffuseColor.z = (GLfloat)atof(pNode->first_node("diffuseColor")->first_node("b")->value());
+		specularColor.x = (GLfloat)atof(pNode->first_node("specularColor")->first_node("r")->value());
+		specularColor.y = (GLfloat)atof(pNode->first_node("specularColor")->first_node("g")->value());
+		specularColor.z = (GLfloat)atof(pNode->first_node("specularColor")->first_node("b")->value());
+		float specPower = (GLfloat)atof(pNode->first_node("specPower")->value());
+
+		char* lightType = pNode->first_node("type")->value();
+		Light* light;
+		if (!std::strcmp(lightType, "point"))
+		{
+			Vector3 position;
+			position.x = (GLfloat)atof(pNode->first_node("position")->first_node("x")->value());
+			position.y = (GLfloat)atof(pNode->first_node("position")->first_node("y")->value());
+			position.z = (GLfloat)atof(pNode->first_node("position")->first_node("z")->value());
+			
+			light = new PointLight(id, 0, diffuseColor, specularColor, specPower, position);
+		}
+		else if (!std::strcmp(lightType, "directional"))
+		{
+			Vector3 direction;
+			direction.x = (GLfloat)atof(pNode->first_node("direction")->first_node("x")->value());
+			direction.y = (GLfloat)atof(pNode->first_node("direction")->first_node("y")->value());
+			direction.z = (GLfloat)atof(pNode->first_node("direction")->first_node("z")->value());
+
+			light = new DirectionalLight(id, 1, diffuseColor, specularColor, specPower, direction);
+		}
+		else if (!std::strcmp(lightType, "spotlight"))
+		{
+			Vector3 position;
+			position.x = (GLfloat)atof(pNode->first_node("position")->first_node("x")->value());
+			position.y = (GLfloat)atof(pNode->first_node("position")->first_node("y")->value());
+			position.z = (GLfloat)atof(pNode->first_node("position")->first_node("z")->value());
+
+			Vector3 direction;
+			direction.x = (GLfloat)atof(pNode->first_node("direction")->first_node("x")->value());
+			direction.y = (GLfloat)atof(pNode->first_node("direction")->first_node("y")->value());
+			direction.z = (GLfloat)atof(pNode->first_node("direction")->first_node("z")->value());
+
+			float angle = toRadians((GLfloat)atof(pNode->first_node("angle")->value()));
+			light = new SpotLight(id, 2, diffuseColor, specularColor, specPower, angle, position, direction);
+		}
+
+		lights.push_back(light);
+
+	}
+
 }
 
 Vector3 SceneManager::getCameraPosition()
@@ -386,4 +450,11 @@ void SceneManager::rotateActiveCameraOZ(int sense)
 {
 	cameras[activeCamera]->rotateOz(sense);
 
+}
+
+SceneManager::~SceneManager()
+{
+	for (Light* light : lights) {
+		delete light;
+	}
 }

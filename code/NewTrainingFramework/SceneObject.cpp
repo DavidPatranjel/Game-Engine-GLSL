@@ -2,6 +2,9 @@
 #include "SceneObject.h"
 #include "Shader.h"
 #include "SceneManager.h"
+#include "PointLight.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
 
 SceneObject::SceneObject(int objectId, const std::string& _name, const Vector3& objectColor, const Vector3& objectPosition, const Vector3& objectRotation, const Vector3& objectScale,
 	Model* objectModel, Shader* objectShader, const std::vector<Texture*>& objectTexture, bool useDepthTest)
@@ -87,6 +90,103 @@ void SceneObject::generalDraw(Camera* activeCamera, ESContext* esContext)
 	{
 		glUniformMatrix4fv(shader->mVUniform, 1, GL_FALSE, (GLfloat*)activeCamera->viewMatrix.m);
 	}
+
+	if (shader->typeUniform != -1)
+	{
+		glUniform1i(shader->typeUniform, SceneManager::getInstance()->lights[0]->type);
+	}
+
+	if (shader->lightPosition != -1)
+	{
+		Light* lightPtr = SceneManager::getInstance()->lights[0];
+		PointLight* pointLightPtr = dynamic_cast<PointLight*>(lightPtr);
+		if (pointLightPtr) {
+			glUniform3f(shader->lightPosition,
+				pointLightPtr->position.x,
+				pointLightPtr->position.y,
+				pointLightPtr->position.z);
+		}
+		else {
+			SpotLight* spotLightPtr = dynamic_cast<SpotLight*>(lightPtr);
+			if (spotLightPtr) {
+				glUniform3f(shader->lightPosition,
+					spotLightPtr->position.x,
+					spotLightPtr->position.y,
+					spotLightPtr->position.z);
+			}
+
+		}
+	}
+
+	if (shader->lightDirection != -1)
+	{
+		Light* lightPtr = SceneManager::getInstance()->lights[0];
+		DirectionalLight* dirLightPtr = dynamic_cast<DirectionalLight*>(lightPtr);
+
+		if (dirLightPtr) {
+			glUniform3f(shader->lightDirection,
+				dirLightPtr->direction.x,
+				dirLightPtr->direction.y,
+				dirLightPtr->direction.z);
+		}
+		else {
+			SpotLight* spotLightPtr = dynamic_cast<SpotLight*>(lightPtr);
+			if (spotLightPtr) {
+				glUniform3f(shader->lightDirection,
+					spotLightPtr->direction.x,
+					spotLightPtr->direction.y,
+					spotLightPtr->direction.z);
+			}
+
+		}
+	}
+
+	if (shader->angleUniform != -1)
+	{
+		Light* lightPtr = SceneManager::getInstance()->lights[0];
+		SpotLight* spotLightPtr = dynamic_cast<SpotLight*>(lightPtr);
+
+		if (spotLightPtr) {
+			glUniform1f(shader->angleUniform,
+				spotLightPtr->angle);
+		}
+	}
+
+	if (shader->lightDiffUnifrom != -1)
+	{
+		glUniform3f(shader->lightDiffUnifrom, 
+			SceneManager::getInstance()->lights[0]->diffuseColor.x, 
+			SceneManager::getInstance()->lights[0]->diffuseColor.y, 
+			SceneManager::getInstance()->lights[0]->diffuseColor.z);
+	}
+
+	if (shader->lightSpecUniform != -1)
+	{
+		glUniform3f(shader->lightSpecUniform, 
+			SceneManager::getInstance()->lights[0]->specularColor.x,
+			SceneManager::getInstance()->lights[0]->specularColor.y,
+			SceneManager::getInstance()->lights[0]->specularColor.z);
+	}
+
+	if (shader->specPowerUniform != -1)
+	{
+		glUniform1f(shader->specPowerUniform, SceneManager::getInstance()->lights[0]->specPower);
+	}
+
+	if (shader->ambientColorUniform != -1)
+	{
+		glUniform3f(shader->ambientColorUniform, 
+			SceneManager::getInstance()->ambientLight.ambientColor.x,
+			SceneManager::getInstance()->ambientLight.ambientColor.y,
+			SceneManager::getInstance()->ambientLight.ambientColor.z);
+	}
+
+	if (shader->ratioUniform != -1)
+	{
+		glUniform1f(shader->ratioUniform, SceneManager::getInstance()->ambientLight.ratio);
+	}
+
+
 
 }
 
